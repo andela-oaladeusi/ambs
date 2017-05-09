@@ -1,3 +1,4 @@
-import ValidateInput from './Validate';
+import Auth from './Authenticate';
+import Authorize from './Authorize';
 
-export { ValidateInput };
+export { Auth, Authorize };

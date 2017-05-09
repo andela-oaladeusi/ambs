@@ -1,15 +1,15 @@
 import express from 'express';
 import { Role } from '../../app/controllers';
-import { ValidateInput } from '../../app/middlewares';
+import { Auth } from '../../app/middlewares';
 
 const RoleRoute = express.Router();
 
 RoleRoute.route('/')
-  .post(ValidateInput.roleInput, Role.create)
+  .post(Auth.roleInput, Role.create)
   .get(Role.all);
 
 RoleRoute.route('/:title')
-  .put(Role.edit)
+  .put(Auth.roleUpdate, Role.edit)
   .delete(Role.delete)
   .get(Role.get);
 

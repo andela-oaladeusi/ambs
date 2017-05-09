@@ -1,3 +1,5 @@
+import db from '../models';
+import { Authorize } from '../middlewares';
 
 const User = {
   /**
@@ -8,6 +10,38 @@ const User = {
    * @return {void | Object} response object or void
    */
   create(req, res) {
+    res.status(200).send({ message: 'success' });
+  },
+  /**
+   * Login
+   * Route: POST /api/v1/users/login
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  login(req, res) {
+    db.User.findOne({ where: { $or: [
+        { userName: req.body.userName },
+        { email: req.body.email }]
+    } })
+    .then((user) => {
+      if (!user) {
+        return res.status(400).send({ message: 'Provide valid details' });
+      }
+      if (user.validPassword(req.body.password)) {
+        const token = Authorize.getToken(user);
+        return res.status(200).send({ message: 'Logged in', token });
+      }
+    });
+  },
+  /**
+   * Logout
+   * Route: POST /api/v1/users/logout
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  logout(req, res) {
     res.status(200).send({ message: 'success' });
   },
   /**
@@ -28,7 +62,7 @@ const User = {
    * @return {void | Object} response object or void
    */
   all(req, res) {
-    res.status(200).send({ message: 'success' });
+    res.status(200).send({ message: req.decoded });
   },
   /**
    * Edit a user

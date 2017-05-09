@@ -1,14 +1,19 @@
 import express from 'express';
 import { User } from '../../app/controllers';
+import { Auth, Authorize } from '../../app/middlewares';
 
 const UserRoute = express.Router();
 
 UserRoute.route('/')
-  .post(User.create)
-  .get(User.all);
+  .post(Auth.userInput, User.create)
+  .get(Authorize.verifyToken, User.all);
+
+UserRoute.post('/login', Auth.userUpdate, User.login);
+
+UserRoute.post('/logout', User.logout);
 
 UserRoute.route('/:title')
-  .put(User.edit)
+  .put(Auth.userUpdate, User.edit)
   .delete(User.delete)
   .get(User.get);
 

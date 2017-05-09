@@ -1,3 +1,5 @@
+import bcrypt from 'bcrypt-nodejs';
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     userName: {
@@ -20,15 +22,41 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false
     },
-    roleTitle: {
+    userRole: {
       type: DataTypes.STRING,
       allowNull: false,
-      defaultValue: 'normal'
+      defaultValue: 'regular'
+    },
+    about: {
+      type: DataTypes.TEXT
     }
   }, {
     classMethods: {
-      associate: (models) => {
-        // associations can be defined here
+      associate(models) {
+        User.belongsTo(models.Role, {
+          foreignKey: 'userRole',
+          onDelete: 'CASCADE'
+        });
+      }
+    },
+
+    instanceMethods: {
+      generateHash() {
+        this.password = bcrypt.hashSync(this.password, bcrypt.genSaltSync(8));
+      },
+      validPassword(password) {
+        return bcrypt.compareSync(password, this.password);
+      },
+    },
+
+    hooks: {
+      beforeCreate(user) {
+        user.generateHash();
+      },
+      beforeUpdate(user) {
+        if (user._changed.password) {
+          user.generateHash();
+        }
       }
     }
   });

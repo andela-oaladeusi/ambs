@@ -28,7 +28,7 @@ const Role = {
    * @return {void | Object} response object or void
    */
   all(req, res) {
-    res.status(200).send({ message: 'success' });
+    res.status(200).send({ message: req.decoded });
   },
   /**
    * Edit a new role

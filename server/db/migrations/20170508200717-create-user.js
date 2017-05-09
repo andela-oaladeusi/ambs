@@ -19,8 +19,15 @@ module.exports = {
       password: {
         type: Sequelize.STRING
       },
-      roleTitle: {
-        type: Sequelize.STRING
+      userRole: {
+        type: Sequelize.STRING,
+        references: {
+          model: 'Roles',
+          key: 'title'
+        }
+      },
+      about: {
+        type: Sequelize.TEXT
       },
       createdAt: {
         allowNull: false,
