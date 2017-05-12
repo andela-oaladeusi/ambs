@@ -1,5 +1,6 @@
+
 module.exports = (sequelize, DataTypes) => {
-  const Role = sequelize.define('Role', {
+  const Type = sequelize.define('Type', {
     title: {
       type: DataTypes.STRING,
       unique: true,
@@ -13,9 +14,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Role.hasMany(models.User, { foreignKey: 'userRole' });
+        Type.hasMany(models.Artist, { foreignKey: 'artistType' });
       }
     }
   });
-  return Role;
+  return Type;
 };

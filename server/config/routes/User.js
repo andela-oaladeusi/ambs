@@ -12,11 +12,11 @@ UserRoute.post('/login', Auth.userUpdate, User.login);
 
 UserRoute.post('/logout', User.logout);
 
-UserRoute.route('/:title')
-  .put(Auth.userUpdate, User.edit)
-  .delete(User.delete)
-  .get(User.get);
+UserRoute.route('/:userName')
+  .put(Authorize.verifyToken, Auth.userUpdate, User.edit)
+  .delete(Authorize.verifyToken, User.delete)
+  .get(Authorize.verifyToken, User.get);
 
-UserRoute.get('/:title/users', User.fetchUserFavorite);
+UserRoute.get('/:title/users', Authorize.verifyToken, User.fetchUserFavorite);
 
 export default UserRoute;

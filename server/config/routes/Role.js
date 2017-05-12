@@ -1,18 +1,18 @@
 import express from 'express';
 import { Role } from '../../app/controllers';
-import { Auth } from '../../app/middlewares';
+import { Auth, Authorize } from '../../app/middlewares';
 
 const RoleRoute = express.Router();
 
 RoleRoute.route('/')
-  .post(Auth.roleInput, Role.create)
-  .get(Role.all);
+  .post(Authorize.verifyToken, Auth.roleTypeInput, Role.create)
+  .get(Authorize.verifyToken, Role.all);
 
 RoleRoute.route('/:title')
-  .put(Auth.roleUpdate, Role.edit)
-  .delete(Role.delete)
-  .get(Role.get);
+  .put(Authorize.verifyToken, Auth.roleTypeUpdate, Role.edit)
+  .delete(Authorize.verifyToken, Role.delete)
+  .get(Authorize.verifyToken, Role.get);
 
-RoleRoute.get('/:title/users', Role.fetchUserRole);
+RoleRoute.get('/:title/users', Authorize.verifyToken, Role.fetchUserRole);
 
 export default RoleRoute;

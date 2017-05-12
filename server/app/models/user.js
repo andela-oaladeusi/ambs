@@ -27,6 +27,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 'regular'
     },
+    avatarId: {
+      type: DataTypes.STRING
+    },
     about: {
       type: DataTypes.TEXT
     }
@@ -35,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
       associate(models) {
         User.belongsTo(models.Role, {
           foreignKey: 'userRole',
+          as: 'title',
           onDelete: 'CASCADE'
         });
       }

@@ -13,6 +13,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/api/v1/roles', route.RoleRoute);
 app.use('/api/v1/users', route.UserRoute);
+app.use('/api/v1/types', route.TypeRoute);
+app.use('/api/v1/artists', route.ArtistRoute);
 
 app.get('*', (req, res) => res.status(200).send({
   message: 'Welcome',

@@ -9,6 +9,7 @@ module.exports = {
         email: 'olawalequest@gmail.com',
         password: bcrypt.hashSync('password', bcrypt.genSaltSync(8)),
         userRole: 'admin',
+        avatarId: 'admin',
         createdAt: new Date(),
         updatedAt: new Date()
       }
