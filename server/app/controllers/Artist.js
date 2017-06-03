@@ -72,7 +72,7 @@ const Artist = {
         artist.destroy()
           .then(() => res.status(200).send({ message: 'Artist not found' }));
       });
-  }
+  },
 };
 
 export default Artist;

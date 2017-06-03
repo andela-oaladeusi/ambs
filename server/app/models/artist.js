@@ -11,8 +11,8 @@ module.exports = (sequelize, DataTypes) => {
     country: {
       type: DataTypes.STRING
     },
-    artistType: {
-      type: DataTypes.STRING
+    typeId: {
+      type: DataTypes.INTEGER
     },
     church: {
       type: DataTypes.STRING
@@ -24,10 +24,10 @@ module.exports = (sequelize, DataTypes) => {
     classMethods: {
       associate: (models) => {
         Artist.belongsTo(models.Type, {
-          foreignKey: 'artistType',
-          as: 'title',
+          foreignKey: 'typeId',
           onDelete: 'CASCADE'
         });
+        Artist.hasMany(models.Song, { foreignKey: 'artistId' });
       }
     }
   });

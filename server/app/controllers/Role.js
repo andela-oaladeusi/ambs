@@ -72,20 +72,6 @@ const Role = {
         role.destroy()
           .then(() => res.status(200).send({ message: 'Deleted' }));
       });
-  },
-  /**
-   * Retrive all user's with a particular role
-   * Route: GET /api/v1/roles/:title/users
-   * @param {Object} req
-   * @param {Object} res
-   * @return {void | Object} response object or void
-   */
-  fetchUserRole(req, res) {
-    db.Role.findAndCountAll({
-      where: { title: req.params.title },
-      include: [db.User]
-    })
-    .then(roleUsers => res.status(200).send(roleUsers));
   }
 };
 

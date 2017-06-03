@@ -47,13 +47,13 @@ const User = {
   },
   /**
    * Retrive a user
-   * Route: GET /api/v1/users/:username
+   * Route: GET /api/v1/users/:id
    * @param {Object} req
    * @param {Object} res
    * @return {void | Object} response object or void
    */
   get(req, res) {
-    db.User.findOne({ where: { userName: req.params.userName } })
+    db.User.findById(req.params.id)
       .then((foundUser) => {
         if (!foundUser) {
           return res.status(404).send({ message: 'User not found' });
@@ -74,13 +74,13 @@ const User = {
   },
   /**
    * Edit a user
-   * Route: PUT /api/v1/users/:title
+   * Route: PUT /api/v1/users/:id
    * @param {Object} req
    * @param {Object} res
    * @return {void | Object} response object or void
    */
   edit(req, res) {
-    db.User.findOne({ where: { userName: req.params.userName } })
+    db.User.findById(req.params.id)
       .then((user) => {
         if (!user) {
           return res.status(200).send({ message: 'User not found' });
@@ -91,13 +91,13 @@ const User = {
   },
   /**
    * Delete a user
-   * Route: DELETE /api/v1/users/:title
+   * Route: DELETE /api/v1/users/:id
    * @param {Object} req
    * @param {Object} res
    * @return {void | Object} response object or void
    */
   delete(req, res) {
-    db.User.findOne({ where: { userName: req.params.userName } })
+    db.User.findById(req.params.id)
       .then((user) => {
         if (!user) {
           return res.status(200).send({ message: 'User not found' });
@@ -105,16 +105,6 @@ const User = {
         user.destroy()
           .then(() => res.status(200).send({ message: 'deleted' }));
       });
-  },
-  /**
-   * Retrive all user's favorite
-   * Route: GET /api/v1/users/:title/favorites
-   * @param {Object} req
-   * @param {Object} res
-   * @return {void | Object} response object or void
-   */
-  fetchUserFavorite(req, res) {
-    res.status(200).send({ message: 'User Favorite' });
   }
 };
 

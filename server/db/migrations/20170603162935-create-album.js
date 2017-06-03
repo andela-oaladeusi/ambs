@@ -1,33 +1,20 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('Artists', {
+    queryInterface.createTable('Albums', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      fullName: {
-        type: Sequelize.STRING
-      },
-      avatarId: {
-        type: Sequelize.STRING
-      },
-      country: {
-        type: Sequelize.STRING
-      },
-      typeId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'Types',
-          key: 'id'
-        }
-      },
-      church: {
+      title: {
         type: Sequelize.STRING
       },
       description: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
+      },
+      artistId: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
@@ -38,5 +25,5 @@ module.exports = {
         type: Sequelize.DATE
       }
     }),
-  down: queryInterface => queryInterface.dropTable('Artists')
+  down: queryInterface => queryInterface.dropTable('Albums')
 };

@@ -14,13 +14,13 @@ const Type = {
   },
   /**
    * Retrive a type
-   * Route: GET /api/v1/types/:title
+   * Route: GET /api/v1/types/:id
    * @param {Object} req
    * @param {Object} res
    * @return {void | Object} response object or void
    */
   get(req, res) {
-    db.Type.findOne({ where: { title: req.params.title } })
+    db.Type.findById(req.params.id)
       .then((type) => {
         if (!type) {
           return res.status(404).send({ message: 'Type not found' });
@@ -41,13 +41,13 @@ const Type = {
   },
   /**
    * Edit a new type
-   * Route: PATCH /api/v1/types/:title
+   * Route: PUT /api/v1/types/:id
    * @param {Object} req
    * @param {Object} res
    * @return {void | Object} response object or void
    */
   edit(req, res) {
-    db.Type.findOne({ where: { title: req.params.title } })
+    db.Type.findById(req.params.id)
       .then((type) => {
         if (!type) {
           return res.status(404).send({ message: 'Type not found' });
@@ -58,13 +58,13 @@ const Type = {
   },
   /**
    * Delete a new type
-   * Route: DELETE /api/v1/types/:title
+   * Route: DELETE /api/v1/types/:id
    * @param {Object} req
    * @param {Object} res
    * @return {void | Object} response object or void
    */
   delete(req, res) {
-    db.Type.findOne({ where: { title: req.params.title } })
+    db.Type.findById(req.params.id)
       .then((type) => {
         if (!type) {
           return res.status(404).send({ message: 'Role not found' });
@@ -72,20 +72,6 @@ const Type = {
         type.destroy()
           .then(() => res.status(200).send({ message: 'Deleted' }));
       });
-  },
-  /**
-   * Retrive all artist's with a particular type
-   * Route: GET /api/v1/types/:title/artists
-   * @param {Object} req
-   * @param {Object} res
-   * @return {void | Object} response object or void
-   */
-  fetchArtistType(req, res) {
-    db.Type.findAndCountAll({
-      where: { title: req.params.title },
-      include: [db.Artist]
-    })
-    .then(typeArtists => res.status(200).send(typeArtists));
   }
 };
 

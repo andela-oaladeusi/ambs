@@ -5,7 +5,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
-      primaryKey: true
     },
     description: {
       type: DataTypes.STRING,
@@ -14,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        Type.hasMany(models.Artist, { foreignKey: 'artistType' });
+        Type.hasMany(models.Artist, { foreignKey: 'typeId' });
+        Type.hasMany(models.Song, { foreignKey: 'typeId' });
       }
     }
   });

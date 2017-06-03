@@ -41,6 +41,7 @@ module.exports = (sequelize, DataTypes) => {
           as: 'title',
           onDelete: 'CASCADE'
         });
+        User.hasMany(models.Song, { foreignKey: 'uploadedBy' });
       }
     },
 
