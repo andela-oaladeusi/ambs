@@ -72,7 +72,40 @@ const Type = {
         type.destroy()
           .then(() => res.status(200).send({ message: 'Deleted' }));
       });
-  }
+  },
+  /**
+   * Retrieve all artists that belongs to a type
+   * Route: GET /api/v1/types/:id/artists
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchAllArtistsWithAType(req, res) {
+    db.Type.findOne({ where: { id: req.params.id }, include: [db.Artist] })
+      .then(artists => res.status(200).send(artists));
+  },
+  /**
+   * Retrieve all songs that belongs to a type
+   * Route: GET /api/v1/types/:id/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchAllSongsWithAType(req, res) {
+    db.Type.findOne({ where: { id: req.params.id }, include: [db.Song] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Retrieve all categories that belongs to a type
+   * Route: GET /api/v1/types/:id/categories
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchAllCategoriesWithAType(req, res) {
+    db.Type.findOne({ where: { id: req.params.id }, include: [db.Category] })
+      .then(categories => res.status(200).send(categories));
+  },
 };
 
 export default Type;

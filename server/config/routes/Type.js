@@ -13,4 +13,10 @@ TypeRoute.route('/:id')
   .delete(Authorize.verifyToken, Type.delete)
   .get(Authorize.verifyToken, Type.get);
 
+TypeRoute.get('/:id/artists', Type.fetchAllArtistsWithAType);
+
+TypeRoute.get('/:id/songs', Type.fetchAllSongsWithAType);
+
+TypeRoute.get('/:id/categories', Type.fetchAllCategoriesWithAType);
+
 export default TypeRoute;

@@ -105,6 +105,39 @@ const User = {
         user.destroy()
           .then(() => res.status(200).send({ message: 'deleted' }));
       });
+  },
+  /**
+   * Get all media uploaded by a user
+   * Route: GET /api/v1/users/:id/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  songUploadedByUser(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [db.Song] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's favourite songs
+   * Route: GET /api/v1/users/:id/favourite/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userFavouriteSongs(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Favourite, attributes: ['songId'] }] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's favourite songs
+   * Route: GET /api/v1/users/:id/favourite/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userFavouriteArtists(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Favourite, attributes: ['artistId'] }] })
+      .then(songs => res.status(200).send(songs));
   }
 };
 

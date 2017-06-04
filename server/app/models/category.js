@@ -18,6 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         // associations can be defined here
         Category.belongsTo(models.User, { foreignKey: 'createdBy' });
         Category.belongsTo(models.Type, { foreignKey: 'typeId' });
+        Category.hasMany(models.Artist, { foreignKey: 'categoryId' });
+        Category.hasMany(models.Song, { foreignKey: 'categoryId' });
       }
     }
   });

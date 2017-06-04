@@ -72,7 +72,29 @@ const Category = {
         category.destroy()
           .then(() => res.status(200).send({ message: 'Deleted' }));
       });
-  }
+  },
+  /**
+   * Retrieve all artists with a category
+   * Route: GET /api/v1/categories/:id/artists
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchArtistsWithCategory(req, res) {
+    db.Category.findOne({ where: { id: req.params.id }, include: [db.Artist] })
+      .then(artists => res.status(200).send(artists));
+  },
+  /**
+   * Retrieve all songs with a category
+   * Route: GET /api/v1/categories/:id/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchSongsWithCategory(req, res) {
+    db.Category.findOne({ where: { id: req.params.id }, include: [db.Song] })
+      .then(songs => res.status(200).send(songs));
+  },
 };
 
 export default Category;

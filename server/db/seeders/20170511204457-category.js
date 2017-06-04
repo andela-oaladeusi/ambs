@@ -5,12 +5,14 @@ module.exports = {
       {
         title: 'worship',
         description: 'worhip category',
+        typeId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         title: 'praise',
         description: 'Praise',
+        typeId: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }

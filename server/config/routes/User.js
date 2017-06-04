@@ -17,4 +17,10 @@ UserRoute.route('/:id')
   .delete(Authorize.verifyToken, User.delete)
   .get(Authorize.verifyToken, User.get);
 
+UserRoute.get('/:id/songs', User.songUploadedByUser);
+
+UserRoute.get('/:id/favourites/songs', User.userFavouriteSongs);
+
+UserRoute.get('/:id/favourites/artists', User.userFavouriteArtists);
+
 export default UserRoute;

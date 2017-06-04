@@ -13,4 +13,8 @@ CategoryRoute.route('/:id')
   .delete(Authorize.verifyToken, Category.delete)
   .get(Authorize.verifyToken, Category.get);
 
+CategoryRoute.get('/:id/artists', Category.fetchArtistsWithCategory);
+
+CategoryRoute.get('/:id/songs', Category.fetchSongsWithCategory);
+
 export default CategoryRoute;

@@ -13,4 +13,6 @@ RoleRoute.route('/:title')
   .delete(Authorize.verifyToken, Role.delete)
   .get(Authorize.verifyToken, Role.get);
 
+RoleRoute.get('/:title/users', Role.fetchAllUsersBelongToARole);
+
 export default RoleRoute;
