@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    createdBy: {
+      type: DataTypes.INTEGER
     }
   }, {
     classMethods: {

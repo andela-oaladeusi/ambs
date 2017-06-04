@@ -13,6 +13,20 @@ module.exports = {
       description: {
         type: Sequelize.STRING
       },
+      typeId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Types',
+          key: 'id'
+        }
+      },
+      createdBy: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

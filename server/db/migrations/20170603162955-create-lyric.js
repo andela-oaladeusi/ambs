@@ -8,16 +8,28 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       songId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Songs',
+          key: 'id'
+        }
       },
       artistId: {
-        type: Sequelize.INTEGER
-      },
-      albumId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Artists',
+          key: 'id'
+        }
       },
       lyric: {
         type: Sequelize.TEXT
+      },
+      createdBy: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

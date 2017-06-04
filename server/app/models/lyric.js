@@ -3,19 +3,21 @@ module.exports = (sequelize, DataTypes) => {
     songId: {
       type: DataTypes.INTEGER
     },
-    albumId: {
-      type: DataTypes.INTEGER
-    },
     artistId: {
       type: DataTypes.INTEGER
     },
     lyric: {
       type: DataTypes.TEXT
     },
+    createdBy: {
+      type: DataTypes.INTEGER
+    }
   }, {
     classMethods: {
       associate: (models) => {
         // associations can be defined here
+        Lyric.belongsTo(models.Song, { foreignKey: 'songId' });
+        Lyric.belongsTo(models.User, { foreignKey: 'createdBy' });
       }
     }
   });

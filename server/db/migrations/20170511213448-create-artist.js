@@ -23,11 +23,25 @@ module.exports = {
           key: 'id'
         }
       },
+      categoryId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Categories',
+          key: 'id'
+        }
+      },
       church: {
         type: Sequelize.STRING
       },
       description: {
         type: Sequelize.TEXT
+      },
+      createdBy: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Users',
+          key: 'id'
+        }
       },
       createdAt: {
         allowNull: false,

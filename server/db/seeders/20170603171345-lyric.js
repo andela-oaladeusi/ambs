@@ -4,7 +4,6 @@ module.exports = {
     queryInterface.bulkInsert('Lyrics', [
       {
         songId: 1,
-        albumId: 1,
         artistId: 1,
         lyric: 'new new lyrics',
         createdAt: new Date(),

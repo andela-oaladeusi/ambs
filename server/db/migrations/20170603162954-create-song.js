@@ -26,7 +26,11 @@ module.exports = {
         }
       },
       categoryId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Categories',
+          key: 'id'
+        }
       },
       albumId: {
         type: Sequelize.INTEGER

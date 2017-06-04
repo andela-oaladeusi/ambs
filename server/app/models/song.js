@@ -42,6 +42,10 @@ module.exports = (sequelize, DataTypes) => {
           foreignKey: 'typeId',
           onDelete: 'CASCADE'
         });
+        Song.belongsTo(models.Category, {
+          foreignKey: 'categoryId',
+          onDelete: 'CASCADE'
+        });
         Song.belongsTo(models.User, {
           foreignKey: 'uploadedBy',
           onDelete: 'CASCADE'

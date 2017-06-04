@@ -9,12 +9,17 @@ module.exports = (sequelize, DataTypes) => {
     description: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    createdBy: {
+      type: DataTypes.INTEGER
     }
   }, {
     classMethods: {
       associate: (models) => {
         Type.hasMany(models.Artist, { foreignKey: 'typeId' });
+        Type.hasMany(models.Category, { foreignKey: 'typeId' });
         Type.hasMany(models.Song, { foreignKey: 'typeId' });
+        Type.belongsTo(models.User, { foreignKey: 'createdBy' });
       }
     }
   });

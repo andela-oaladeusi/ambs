@@ -5,18 +5,21 @@ module.exports = {
       {
         title: 'song',
         description: 'Audio songs',
+        createdBy: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         title: 'message',
         description: `Audio messages`,
+        createdBy: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
         title: 'book',
         description: 'Audio books',
+        createdBy: 1,
         createdAt: new Date(),
         updatedAt: new Date()
       }
