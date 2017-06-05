@@ -138,6 +138,61 @@ const User = {
   userFavouriteArtists(req, res) {
     db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Favourite, attributes: ['artistId'] }] })
       .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's created lyrics
+   * Route: GET /api/v1/users/:id/created/lyrics
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userCreatedLyrics(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Lyric }] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's created albums
+   * Route: GET /api/v1/users/:id/created/albums
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userCreatedAlbums(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Album }] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's created artists
+   * Route: GET /api/v1/users/:id/created/artists
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userCreatedArtists(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Artist }] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's created type
+   * Route: GET /api/v1/users/:id/created/types
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userCreatedTypes(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Type }] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Get all user's created categories
+   * Route: GET /api/v1/users/:id/created/categories
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  userCreatedCategories(req, res) {
+    db.User.findOne({ where: { id: req.params.id }, include: [{ model: db.Category }] })
+      .then(songs => res.status(200).send(songs));
   }
 };
 

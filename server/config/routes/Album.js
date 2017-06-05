@@ -13,4 +13,6 @@ AlbumRoute.route('/:id')
   .delete(Authorize.verifyToken, Album.delete)
   .get(Authorize.verifyToken, Album.get);
 
+AlbumRoute.get('/:id/songs', Album.fetchAlbumSongs);
+
 export default AlbumRoute;

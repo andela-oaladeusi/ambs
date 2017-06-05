@@ -23,4 +23,14 @@ UserRoute.get('/:id/favourites/songs', User.userFavouriteSongs);
 
 UserRoute.get('/:id/favourites/artists', User.userFavouriteArtists);
 
+UserRoute.get('/:id/created/lyrics', User.userCreatedLyrics);
+
+UserRoute.get('/:id/created/artists', User.userCreatedArtists);
+
+UserRoute.get('/:id/created/albums', User.userCreatedAlbums);
+
+UserRoute.get('/:id/created/types', User.userCreatedTypes);
+
+UserRoute.get('/:id/created/categories', User.userCreatedCategories);
+
 export default UserRoute;

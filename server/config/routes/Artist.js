@@ -13,4 +13,10 @@ ArtistRoute.route('/:id')
   .delete(Authorize.verifyToken, Artist.delete)
   .get(Authorize.verifyToken, Artist.get);
 
+ArtistRoute.get('/:id/favourites/users', Artist.usersArtistFavourite);
+
+ArtistRoute.get('/:id/songs', Artist.fetchArtistSongs);
+
+ArtistRoute.get('/:id/albums', Artist.fetchArtistAlbums);
+
 export default ArtistRoute;

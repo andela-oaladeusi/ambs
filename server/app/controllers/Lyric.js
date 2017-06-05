@@ -20,7 +20,7 @@ const Lyric = {
    * @return {void | Object} response object or void
    */
   get(req, res) {
-    db.Lyric.findById(req.params.id)
+    db.Lyric.findOne({ where: { id: req.params.id }, include: [db.Song] })
       .then((lyric) => {
         if (!lyric) {
           return res.status(404).send({ message: 'Lyric not found' });
@@ -36,7 +36,7 @@ const Lyric = {
    * @return {void | Object} response object or void
    */
   all(req, res) {
-    db.Lyric.findAndCountAll()
+    db.Lyric.findAndCountAll({ include: [db.Song] })
       .then(lyrics => res.status(200).send(lyrics));
   },
   /**

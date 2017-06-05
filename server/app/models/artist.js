@@ -38,6 +38,8 @@ module.exports = (sequelize, DataTypes) => {
         Artist.belongsTo(models.Type, { foreignKey: 'typeId' });
         Artist.belongsTo(models.Category, { foreignKey: 'categoryId' });
         Artist.hasMany(models.Lyric, { foreignKey: 'artistId' });
+        Artist.hasMany(models.Favourite, { foreignKey: 'artistId' });
+        Artist.hasMany(models.Album, { foreignKey: 'artistId' });
       }
     }
   });

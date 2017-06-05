@@ -73,6 +73,39 @@ const Artist = {
           .then(() => res.status(200).send({ message: 'Artist not found' }));
       });
   },
+  /**
+   * Retrieve all Users that has a particular artist as their favourite
+   * Route: GET /api/v1/artists/:id/favourites/users
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  usersArtistFavourite(req, res) {
+    db.Artist.findOne({ where: { id: req.params.id }, include: [{ model: db.Favourite, attributes: ['userId'] }] })
+      .then(favouriteUsers => res.status(200).send(favouriteUsers));
+  },
+  /**
+   * Retrieve all Songs that belongs to a particular artist
+   * Route: GET /api/v1/artists/:id/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchArtistSongs(req, res) {
+    db.Artist.findOne({ where: { id: req.params.id }, include: [db.Song] })
+      .then(songs => res.status(200).send(songs));
+  },
+  /**
+   * Retrieve all Album that belongs to a particular artist
+   * Route: GET /api/v1/artists/:id/albums
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchArtistAlbums(req, res) {
+    db.Artist.findOne({ where: { id: req.params.id }, include: [db.Album] })
+      .then(albums => res.status(200).send(albums));
+  },
 };
 
 export default Artist;

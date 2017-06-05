@@ -72,7 +72,18 @@ const Album = {
         Album.destroy()
           .then(() => res.status(200).send({ message: 'Deleted' }));
       });
-  }
+  },
+  /**
+   * Retrieve all songs that belongs to a album
+   * Route: GET /api/v1/albums/:id/songs
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  fetchAlbumSongs(req, res) {
+    db.Album.findAll({ where: { id: req.params.id }, include: [db.Song] })
+      .then(songs => res.status(200).send(songs));
+  },
 };
 
 export default Album;
