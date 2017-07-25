@@ -7,6 +7,7 @@ import Category from './Category';
 import Lyric from './Lyric';
 import Album from './Album';
 import Favourite from './Favourite';
+import UserAuth from './Auth';
 
 export {
   Role,
@@ -17,5 +18,6 @@ export {
   Category,
   Lyric,
   Album,
-  Favourite
+  Favourite,
+  UserAuth
 };

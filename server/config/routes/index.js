@@ -7,6 +7,7 @@ import CategoryRoute from './Category';
 import LyricRoute from './Lyric';
 import AlbumRoute from './Album';
 import FavouriteRoute from './Favourite';
+import AuthRoute from './Auth';
 
 export {
   RoleRoute,
@@ -17,5 +18,6 @@ export {
   CategoryRoute,
   LyricRoute,
   AlbumRoute,
-  FavouriteRoute
+  FavouriteRoute,
+  AuthRoute
 };
