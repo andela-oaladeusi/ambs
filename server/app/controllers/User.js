@@ -3,49 +3,6 @@ import { Authorize } from '../middlewares';
 
 const User = {
   /**
-   * Create a new user
-   * Route: POST /api/v1/users
-   * @param {Object} req
-   * @param {Object} res
-   * @return {void | Object} response object or void
-   */
-  create(req, res) {
-    db.User.create(req.body)
-      .then(user => res.status(201).send({ message: 'created', user }));
-  },
-  /**
-   * Login
-   * Route: POST /api/v1/users/login
-   * @param {Object} req
-   * @param {Object} res
-   * @return {void | Object} response object or void
-   */
-  login(req, res) {
-    db.User.findOne({ where: { $or: [
-        { userName: req.body.userName },
-        { email: req.body.email }]
-    } })
-    .then((user) => {
-      if (!user) {
-        return res.status(400).send({ message: 'Provide valid details' });
-      }
-      if (user.validPassword(req.body.password)) {
-        const token = Authorize.getToken(user);
-        return res.status(200).send({ message: 'Logged in', token });
-      }
-    });
-  },
-  /**
-   * Logout
-   * Route: POST /api/v1/users/logout
-   * @param {Object} req
-   * @param {Object} res
-   * @return {void | Object} response object or void
-   */
-  logout(req, res) {
-    res.status(200).send({ message: 'Logged Out' });
-  },
-  /**
    * Retrive a user
    * Route: GET /api/v1/users/:id
    * @param {Object} req

@@ -1,6 +1,7 @@
 import db from '../models'
 import request from 'request';
 import google from 'googleapis';
+import { Authorize } from '../middlewares';
 
 const facebookClientId = '1892375284373018';
 const facebookRedirectUrl = 'http://localhost:3000/';
@@ -22,7 +23,7 @@ const UserAuth = {
     } else if (req.query.auth_type === 'google') {
       UserAuth.fetchGoogleInfo(req, res);
     } else {
-
+      UserAuth.normalLogin(req, res);
     }
   },
   getOauthClient() {
@@ -95,7 +96,53 @@ const UserAuth = {
         return err ? reject(err) : resolve(user);
       });
     });
-  }
+  },
+  /**
+   * Create a new user
+   * Route: POST /api/v1/auth/register
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  create(req, res) {
+    db.User.create(req.body)
+      .then(user => res.status(201).send({ message: 'created', user }));
+  },
+  /**
+   * Login
+   * Route: POST /api/v1/auth/login
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  normalLogin(req, res) {
+    console.log(req.body.identity);
+    db.User.findOne({ email: req.body.identity })
+    .then((user) => {
+      console.log(user.dataValues);
+      if (!user) {
+        return res.status(400).send({ message: 'Provide valid details' });
+      }
+      if (user.validPassword(req.body.password)) {
+        const token = Authorize.getToken(user);
+        return res.status(200).send({ message: 'Logged in', token });
+      }
+    })
+    .catch((err) => {
+      console.log(err.message);
+      return res.status(501).send(err);
+    });
+  },
+  /**
+   * Logout
+   * Route: POST /api/v1/auth/logout
+   * @param {Object} req
+   * @param {Object} res
+   * @return {void | Object} response object or void
+   */
+  logout(req, res) {
+    res.status(200).send({ message: 'Logged Out' });
+  },
 }
 
 export default UserAuth;
